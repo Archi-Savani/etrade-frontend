@@ -6,32 +6,37 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from "react-redux";
 import AuthLayout from "../layout";
 import { logIn } from "@/store/slices/authSlice";
+import axios from 'axios';
 
 const SignIn = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const [signInData, setSignInData] = useState(null);
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState("");
     const {
         register,
         handleSubmit,
         formState: { errors },
-      } = useForm();
+    } = useForm();
 
-    const loginInfo = {
-        email: "admin@email.com",
-        password: "1234"
-    }
-    
-    const onSubmit = (data) => {
-        if (data.email === loginInfo.email &&  data.password === loginInfo.password) {
-            setSignInData(data);
-            dispatch(logIn(data.email));
-            router.push('/dashboard');
-        }else {
-            setLoginError(true);
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('https://etrade-kils.onrender.com/api/user/login', data);
+            const { user } = response.data;
+
+            // Dispatch login action with user data
+            dispatch(logIn(user));
+
+            // Redirect to dashboard
+            router.push('/home/electronics');
+        } catch (error) {
+            // Check if the error is from the server response
+            if (error.response) {
+                setLoginError(error.response.data.message || 'Login failed');
+            } else {
+                setLoginError('An unexpected error occurred. Please try again.');
+            }
         }
-    }
+    };
 
     return ( 
         <AuthLayout bgImage="bg_image--9">
