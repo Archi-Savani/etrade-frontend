@@ -53,16 +53,6 @@ const SignIn = () => {
                 <h3 className="title">Sign in to eTrade.</h3>
                 <p className="b2 mb--55">Enter your detail below</p>
                 <form className="signin-form" onSubmit={handleSubmit(onSubmit)}>
-                    {/*<div className="form-group">*/}
-                    {/*    <label>UserName</label>*/}
-                    {/*    <input*/}
-                    {/*        type="text"*/}
-                    {/*        className="form-control"*/}
-                    {/*        {...register('name', { required: true })}*/}
-                    {/*        placeholder="User Name"*/}
-                    {/*    />*/}
-                    {/*    {errors.name && <p className="error">User Name is required.</p>}*/}
-                    {/*</div>*/}
                     <div className="form-group">
                         <label>Email</label>
                         <input

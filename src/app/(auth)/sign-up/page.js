@@ -58,7 +58,7 @@ const SignUp = () => {
                         {...register('name', { required: true })}
                         placeholder="admin"
                     />
-                    {errors.userName && <p className="error">User Name is required.</p>}
+                    {errors.name && <p className="error">User Name is required.</p>}
                 </div>
                 <div className="form-group">
                     <label>Email</label>
