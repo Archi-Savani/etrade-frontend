@@ -11,12 +11,8 @@ import { logIn } from "@/store/slices/authSlice";
 const SignIn = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-    const [loginError, setLoginError] = useState("");
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+    const [loginError, setLoginError] = useState(null); // To handle login errors
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         setLoginError(null); // Clear any previous errors
@@ -56,7 +52,7 @@ const SignIn = () => {
             <div className="axil-signin-form">
                 <h3 className="title">Sign in to eTrade.</h3>
                 <p className="b2 mb--55">Enter your detail below</p>
-                <form className="singin-form" onSubmit={handleSubmit(onSubmit)}>
+                <form className="signin-form" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label>Email</label>
                         <input
