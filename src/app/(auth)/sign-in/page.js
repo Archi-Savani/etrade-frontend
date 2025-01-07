@@ -17,7 +17,6 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         setLoginError(null); // Clear any previous errors
         try {
-            // Make POST request to the login API
             const response = await axios.post(
                 'https://etrade-kils.onrender.com/api/user/login',
                 data,
@@ -25,21 +24,18 @@ const SignIn = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    withCredentials: true, // Include credentials for cookies/auth
+                    withCredentials: true,
                 }
             );
-
             if (response.status === 200) {
-                // Save user info in Redux store or local storage
-                dispatch(logIn(response.data)); // Assuming `logIn` takes user data
-
-                // Redirect to the dashboard
+                const { token } = response.data;
+                localStorage.setItem('token', token);
+                dispatch(logIn(response.data));
                 router.push('/home/electronics');
             } else {
                 throw new Error('Unexpected server response.');
             }
         } catch (err) {
-            // Handle errors from the server or network
             setLoginError(
                 err.response?.data?.message ||
                 'Invalid credentials. Please try again.'

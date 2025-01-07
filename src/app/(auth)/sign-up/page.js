@@ -1,7 +1,7 @@
 'use client';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation'; // Import useRouter from Next.js
+import {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {useRouter} from 'next/navigation'; // Import useRouter from Next.js
 import axios from 'axios'; // Import Axios
 
 const SignUp = () => {
@@ -10,7 +10,7 @@ const SignUp = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: {errors},
     } = useForm();
 
     const router = useRouter(); // Initialize the router
@@ -55,7 +55,7 @@ const SignUp = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register('name', { required: true })}
+                        {...register('name', {required: true})}
                         placeholder="admin"
                     />
                     {errors.name && <p className="error">User Name is required.</p>}
@@ -65,7 +65,7 @@ const SignUp = () => {
                     <input
                         type="email"
                         className="form-control"
-                        {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+                        {...register('email', {required: true, pattern: /^\S+@\S+$/i})}
                         placeholder="annie@example.com"
                     />
                     {errors.email && <p className="error">Email is required and must be valid.</p>}
@@ -75,7 +75,7 @@ const SignUp = () => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register('password', { required: true, minLength: 4 })}
+                        {...register('password', {required: true, minLength: 4})}
                     />
                     {errors.password && (
                         <p className="error">Password is required (min length: 4).</p>
