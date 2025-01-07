@@ -17,6 +17,7 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         setLoginError(null); // Clear any previous errors
         try {
+            // Make POST request to the login API
             const response = await axios.post(
                 'https://etrade-kils.onrender.com/api/user/login',
                 data,
@@ -24,9 +25,10 @@ const SignIn = () => {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    withCredentials: true,
+                    withCredentials: true, // Include credentials for cookies/auth
                 }
             );
+
             if (response.status === 200) {
                 const { token } = response.data;
                 localStorage.setItem('token', token);
@@ -36,6 +38,7 @@ const SignIn = () => {
                 throw new Error('Unexpected server response.');
             }
         } catch (err) {
+            // Handle errors from the server or network
             setLoginError(
                 err.response?.data?.message ||
                 'Invalid credentials. Please try again.'
